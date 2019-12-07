@@ -15,6 +15,7 @@ fun runExamples() {
     allPythonFiles()
     allJavaScriptFiles()
     allCppFiles()
+    allRubyFiles()
 
 
     AllJavaFiles.runExample()
