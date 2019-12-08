@@ -37,9 +37,9 @@ grammar Corundum;
 
 prog : expression_list;
 
-expression_list : expression terminator
-                | expression_list expression terminator
-                | terminator
+expression_list : expression terminator?
+                | expression_list terminator expression terminator?
+                | terminator?
                 ;
 
 expression : function_definition
@@ -155,12 +155,12 @@ for_loop_list : for_loop_list COMMA all_assignment
 
 statement_body : statement_expression_list;
 
-statement_expression_list : expression terminator
-                          | RETRY terminator
-                          | break_expression terminator
-                          | statement_expression_list expression terminator
-                          | statement_expression_list RETRY terminator
-                          | statement_expression_list break_expression terminator
+statement_expression_list : expression terminator?
+                          | RETRY terminator?
+                          | break_expression terminator?
+                          | statement_expression_list expression terminator?
+                          | statement_expression_list RETRY terminator?
+                          | statement_expression_list break_expression terminator?
                           ;
 
 assignment : var_id=lvalue op=ASSIGN rvalue
