@@ -8,6 +8,7 @@ plugins {
     kotlin("jvm") version "1.3.60"
     id("application")
     id("tanvd.kosogor") version "1.0.6"
+    id("antlr")
 }
 
 application {
@@ -24,9 +25,10 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-    compile("io.github.vovak.astminer", "astminer-dev", "0.5.5")
+    antlr("org.antlr:antlr4:4.7.1")
+//    compile("io.github.vovak.astminer", "astminer-dev", "0.5.5")
     compile("com.github.ajalt", "clikt", "2.1.0")
-
+    implementation(files("astminer-0.5.5.jar"))
     testImplementation("junit:junit:4.11")
     testImplementation(kotlin("test-junit"))
 }
