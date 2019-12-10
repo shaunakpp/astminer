@@ -13,15 +13,15 @@ import java.lang.Exception
 class RubyParser : Parser<SimpleNode> {
     override fun parse(content: InputStream): SimpleNode? {
         // return try {
-            val lexer = CorundumLexer(CharStreams.fromStream(content))
-            lexer.removeErrorListeners()
-            val tokens = CommonTokenStream(lexer)
-            val parser = CorundumParser(tokens)
-            parser.removeErrorListeners()
-            val context = parser.prog()
-            return convertAntlrTree(context, CorundumParser.ruleNames, CorundumParser.VOCABULARY)
+        val lexer = CorundumLexer(CharStreams.fromStream(content))
+        lexer.removeErrorListeners()
+        val tokens = CommonTokenStream(lexer)
+        val parser = CorundumParser(tokens)
+        parser.removeErrorListeners()
+        val context = parser.prog()
+        return convertAntlrTree(context, CorundumParser.ruleNames, CorundumParser.VOCABULARY)
         // } catch (e: Exception) {
-            // return null
+        // return null
         // }
     }
 }
