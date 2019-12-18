@@ -57,7 +57,7 @@ class PathMinerLoader:
 
     @staticmethod
     def _load_path_contexts(path_contexts_file):
-        contexts = pd.read_csv(path_contexts_file, sep=',')
+        contexts = pd.read_csv(path_contexts_file, sep=' ')
         contexts['path_contexts'] = contexts['path_contexts'].fillna('')
         contexts['path_contexts'] = contexts['path_contexts'].map(
             lambda ctx: list(map(PathContext.fromstring, ctx.split(';'))) if ctx else list()

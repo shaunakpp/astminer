@@ -1,7 +1,7 @@
 package astminer.parse.antlr.ruby
 
-import me.vovak.antlr.parser.CorundumLexer
-import me.vovak.antlr.parser.CorundumParser
+import me.vovak.antlr.parser.RubyParser
+import me.vovak.antlr.parser.RubyLexer
 import astminer.common.model.Parser
 import astminer.parse.antlr.SimpleNode
 import astminer.parse.antlr.convertAntlrTree
@@ -13,13 +13,13 @@ import java.lang.Exception
 class RubyParser : Parser<SimpleNode> {
     override fun parse(content: InputStream): SimpleNode? {
         // return try {
-        val lexer = CorundumLexer(CharStreams.fromStream(content))
+        val lexer = RubyLexer(CharStreams.fromStream(content))
         lexer.removeErrorListeners()
         val tokens = CommonTokenStream(lexer)
-        val parser = CorundumParser(tokens)
+        val parser = RubyParser(tokens)
         parser.removeErrorListeners()
-        val context = parser.prog()
-        return convertAntlrTree(context, CorundumParser.ruleNames, CorundumParser.VOCABULARY)
+        val context = parser.compilation_unit()
+        return convertAntlrTree(context, RubyParser.ruleNames, RubyParser.VOCABULARY)
         // } catch (e: Exception) {
         // return null
         // }

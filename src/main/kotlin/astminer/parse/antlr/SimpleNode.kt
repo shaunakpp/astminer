@@ -29,7 +29,13 @@ class SimpleNode(private val typeLabel: String, private var parent: Node?, priva
     }
 
     override fun getToken(): String {
-        return token ?: "null"
+        return if(token == null){
+            val s = StringBuilder()
+            children.forEach{ s.append(it.getToken())}
+            s.toString()
+        }else{
+            token as String
+        }
     }
 
     fun setToken(newToken: String) {

@@ -9,16 +9,16 @@ import astminer.parse.antlr.decompressTypeLabel
 class RubyMethodSplitter : TreeMethodSplitter<SimpleNode> {
 
     companion object {
-        private const val METHOD_NODE = "function_name"
-        private const val METHOD_NAME_NODE = "id"
+        private const val METHOD_NODE = "function_definition_header"
+        private const val METHOD_NAME_NODE = "function_name"
 
-        private const val CLASS_DECLARATION_NODE = ""
-        private const val CLASS_NAME_NODE = ""
+        private const val CLASS_DECLARATION_NODE = "class_definition"
+        private const val CLASS_NAME_NODE = "cpath"
 
         private const val METHOD_PARAMETER_NODE = "function_definition_params"
-        private const val METHOD_PARAMETER_INNER_NODE = "function_definition_params_list"
-        private const val METHOD_SINGLE_PARAMETER_NODE = "function_definition_params_id"
-        private const val PARAMETER_NAME_NODE = "id"
+        private const val METHOD_PARAMETER_INNER_NODE = "function_definition_param"
+        private const val METHOD_SINGLE_PARAMETER_NODE = "function_definition_param"
+        private const val PARAMETER_NAME_NODE = "identifier"
     }
 
     override fun splitIntoMethods(root: SimpleNode): Collection<MethodInfo<SimpleNode>> {
@@ -30,7 +30,7 @@ class RubyMethodSplitter : TreeMethodSplitter<SimpleNode> {
 
     private fun collectMethodInfo(methodNode: SimpleNode): MethodInfo<SimpleNode> {
         val methodName = methodNode.getChildOfType(METHOD_NAME_NODE) as? SimpleNode
-
+        println(methodName?.getToken())
         val classRoot = getEnclosingClass(methodNode)
         val className = classRoot?.getChildOfType(CLASS_NAME_NODE) as? SimpleNode
 

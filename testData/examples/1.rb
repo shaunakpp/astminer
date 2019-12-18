@@ -11,3 +11,9 @@ def hello
 end
 
 hello()
+
+class Foo
+def test
+    puts "hello"
+end
+end
